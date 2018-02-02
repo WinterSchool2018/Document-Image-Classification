@@ -45,8 +45,11 @@ def main():
             _, rot_img, angle = align.main(cv_img)
 
             print('angle %f\n' % angle)
-            # validate
-            # print results
+
+            bools = valid.is_page_valid(rot_img, class_id)
+            print(bools)
+        else:
+            print('%s is not file, skip.' % path)
 
 
 if __name__ == '__main__':
