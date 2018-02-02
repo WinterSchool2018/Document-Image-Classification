@@ -66,3 +66,14 @@ def is_valid(document, rects):
             valid = False
             break
     return valid
+
+
+def draw_rectangle(img, p1, p2):
+    cv2.rectangle(img, p1, p2, (0, 0, 255), 1)
+
+
+def draw_rects(document, rects):
+    for rect in rects:
+        p1,p2 = rect
+        draw_rectangle(document, p1, p2)
+    return document
