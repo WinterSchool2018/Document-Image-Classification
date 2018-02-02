@@ -2,22 +2,8 @@
 
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import cv2
-import skimage
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-from skimage import color
-from skimage import io
-
-img = cv2.imread('image.png')
-imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-imgray = cv2.bitwise_not(imgray)
 
 def rotate_image(img,angle):
     rows,cols = img.shape[:2]
@@ -26,8 +12,6 @@ def rotate_image(img,angle):
 
     return dst, M
 
-
-# In[ ]:
 
 def get_rotation_angle(imgray):
 
@@ -45,12 +29,13 @@ def get_rotation_angle(imgray):
 
     return angle
 
-angle = get_rotation_angle(imgray)
 
-(img_rot,_)= rotate_image(img, angle)
+def main(imgray):
+    # img = cv2.imread(filename)
+    # imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    imgray = cv2.bitwise_not(imgray)
 
-plt.imshow(img_rot)
-plt.show()
+    angle = get_rotation_angle(imgray)
 
-cv2.imwrite('image1.png',img_rot)
-
+    (img_rot,_)= rotate_image(img, angle)
+    return img_rot
