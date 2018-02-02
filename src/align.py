@@ -23,26 +23,29 @@ def rotate_image(img,angle):
     rows,cols = img.shape[:2]
     M=cv2.getRotationMatrix2D((cols/2,rows/2),angle,1)
     dst=cv2.warpAffine(img,M,(cols,rows))
-    
+
     return dst, M
 
 
 # In[ ]:
 
+def get_rotation_angle(imgray):
 
-thresh = cv2.threshold(imgray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    thresh = cv2.threshold(imgray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
-coords = np.column_stack(np.where(thresh > 0))
+    coords = np.column_stack(np.where(thresh > 0))
 
-angle = cv2.minAreaRect(coords)[-1]
+    angle = cv2.minAreaRect(coords)[-1]
 
-if angle < -45:    
-    angle = -(90 + angle)
- 
-else:
-    angle = -angle
+    if angle < -45:
+        angle = -(90 + angle)
 
-print(angle)
+    else:
+        angle = -angle
+
+    return angle
+
+angle = get_rotation_angle(imgray)
 
 (img_rot,_)= rotate_image(img, angle)
 
