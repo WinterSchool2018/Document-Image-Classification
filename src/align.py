@@ -38,4 +38,4 @@ def main(img):
     angle = get_rotation_angle(imgray)
 
     (img_rot,_)= rotate_image(img, angle)
-    return img_rot
+    return imgray, img_rot, angle
