@@ -30,9 +30,9 @@ def get_rotation_angle(imgray):
     return angle
 
 
-def main(imgray):
-    # img = cv2.imread(filename)
-    # imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+def main(img):
+    ''' img is not gray scale '''
+    imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     imgray = cv2.bitwise_not(imgray)
 
     angle = get_rotation_angle(imgray)

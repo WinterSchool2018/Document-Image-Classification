@@ -55,6 +55,8 @@ def is_page_valid(document, page_class_id):
 
 # x and y coordinates mixed up with each other
 def is_valid(document, rects):
+    ''' document is not gray scale '''
+    document = cv2.cvtColor(document ,cv2.COLOR_BGR2GRAY)
     for rect in rects:
         p1,p2 = rect
         x1,y1 = p1
@@ -73,6 +75,8 @@ def draw_rectangle(img, p1, p2):
 
 
 def draw_rects(document, rects):
+    ''' document is not gray scale '''
+    document = cv2.cvtColor(document, cv2.COLOR_BGR2GRAY)
     for rect in rects:
         p1,p2 = rect
         draw_rectangle(document, p1, p2)

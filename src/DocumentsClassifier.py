@@ -32,8 +32,9 @@ class DocumentsClassificator:
 
 		self._prepare_classifier()
 
-	def document_class(self, path_to_image):
-		img = imread(path_to_image)
+	def document_class(self, img):
+		''' img is not gray scale '''
+		# img = imread(path_to_image)
 		img = self._prepare_image(img)
 		doc_class = self.classifier.predict(img)
 		return doc_class[0].argmax()
