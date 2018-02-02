@@ -2,6 +2,7 @@
 import argparse
 import os
 import skimage.io
+import cv2
 import valid
 import align
 
@@ -37,9 +38,14 @@ def main():
     for path in paths:
         if os.path.isfile(path):
             img = skimage.io.imread(path)
+            cv_img = cv2.imread(path)
             class_id = classifier.document_class(img)
             print("%s is of class %d" % (os.path.basename(path), class_id))
-            # align
+
+            # TODO: compare [0] and [1] images
+            _, rot_img, angle = align.main(cv_img)
+
+            print('angle %f\n' % angle)
             # validate
             # print results
 
