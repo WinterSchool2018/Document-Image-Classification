@@ -57,16 +57,14 @@ def is_page_valid(document, page_class_id):
 def is_valid(document, rects):
     ''' document is not gray scale '''
     document = cv2.cvtColor(document ,cv2.COLOR_BGR2GRAY)
+    valid = list()
     for rect in rects:
         p1,p2 = rect
         x1,y1 = p1
         x2,y2 = p2
-        valid = True
         field_img = document[y1:y2,x1:x2]
-        flag = is_signature(field_img)
-        if flag[0] == False:
-            valid = False
-            break
+        flag, _ = is_signature(field_img)
+        valid.append(flag)
     return valid
 
 
