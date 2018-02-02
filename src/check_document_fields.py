@@ -1,18 +1,11 @@
 
 # coding: utf-8
 
-# In[51]:
-
-
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
 
 
-# In[52]:
-
-
-#Points coordinats for two NSU documents 
+#Points coordinats for two NSU documents
 
 dog1 = [((1497, 231), (1505,254)),
 ((1567, 238), (1604, 252)),
@@ -30,19 +23,7 @@ dog2 = [((672, 1694),(692, 1708)),
 ((1799, 2361), (2203, 2377)),
 ((1179, 2773), (1711, 2826))]
 
-
-# In[53]:
-
-
-test1 = cv2.imread('dog1_full.jpg', cv2.IMREAD_GRAYSCALE)
-test2 = cv2.imread('dog2_full.jpg', cv2.IMREAD_GRAYSCALE)
-#cv2.namedWindow('exm', cv2.WINDOW_NORMAL)
-#cv2.imshow ('exm',test1)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
-
-
-# In[54]:
+CLASS_RECTS = (dog1, dog2)
 
 
 def calc_image(img):
@@ -56,6 +37,7 @@ def calc_image(img):
 
     return percent
 
+
 def is_signature(img, threshold=5):
     """
     Проверяем есть ли подпись в ``img``
@@ -67,7 +49,8 @@ def is_signature(img, threshold=5):
     return percent > threshold, round(percent, 3)
 
 
-# In[55]:
+def is_page_valid(document, page_class_id):
+    return is_valid(document, CLASS_RECTS[page_class_id])
 
 
 # x and y coordinates mixed up with each other
@@ -78,26 +61,8 @@ def is_valid(document, rects):
         x2,y2 = p2
         valid = True
         field_img = document[y1:y2,x1:x2]
-        #cv2.imshow('test', field_img)
-        plt.imshow(field_img, cmap = 'gray', interpolation = 'bicubic')
-        plt.xticks([]), plt.yticks([])
-        plt.show()
         flag = is_signature(field_img)
         if flag[0] == False:
             valid = False
-            #print ('Not full')
             break
     return valid
-
-
-# In[56]:
-
-
-print (is_valid(test1,dog1))
-
-
-# In[57]:
-
-
-print (is_valid(test1,dog1))
-
