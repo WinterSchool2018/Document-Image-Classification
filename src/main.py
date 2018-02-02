@@ -1,6 +1,9 @@
 """ main module """
 import argparse
 import os
+import skimage.io
+import valid
+import align
 
 
 def main():
@@ -33,7 +36,8 @@ def main():
 
     for path in paths:
         if os.path.isfile(path):
-            class_id = classifier.document_class(path)
+            img = skimage.io.imread(path)
+            class_id = classifier.document_class(img)
             print("%s is of class %d" % (os.path.basename(path), class_id))
             # align
             # validate
