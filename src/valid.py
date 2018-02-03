@@ -23,6 +23,10 @@ dog2 = [((672, 1694),(692, 1708)),
 ((1799, 2361), (2203, 2377)),
 ((1179, 2773), (1711, 2826))]
 
+nist_rect = [((230,131),(831,141)),
+((229,169),(732,180)),
+((232,207),(732,218))]
+
 CLASS_RECTS = (dog1, dog2)
 
 
@@ -49,8 +53,11 @@ def is_signature(img, threshold=5):
     return percent > threshold, round(percent, 3)
 
 
-def is_page_valid(document, page_class_id):
-    return is_valid(document, CLASS_RECTS[page_class_id])
+def is_page_valid(document, page_class_id, is_nist):
+	if is_nist:
+		return is_valid(document, nist_rect)
+	else:
+		return is_valid(document, CLASS_RECTS[page_class_id])
 
 
 # x and y coordinates mixed up with each other

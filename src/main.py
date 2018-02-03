@@ -12,8 +12,10 @@ def main():
         description='Classify image documents')
     parser.add_argument('input_path', type=str,
                         help='path to directory with documents images')
+    parser.add_argument('--nist', dest='nist', action='store_true')
     args = parser.parse_args()
     input_path = args.input_path
+    is_nist = args.nist
 
     if not os.path.isdir(input_path):
         raise Exception('%s is not directory' % input_path)
@@ -45,7 +47,7 @@ def main():
 
             print('angle %f\n' % angle)
 
-            bools = valid.is_page_valid(rot_img, class_id)
+            bools = valid.is_page_valid(rot_img, class_id, is_nist)
             print(bools)
         else:
             print('%s is not file, skip.' % path)
