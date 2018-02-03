@@ -1,5 +1,5 @@
 # Document-Image-Classification
-[![Build Status](https://travis-ci.org/WinterSchool2018/Document-Image-Classification.svg?branch=master)](https://travis-ci.org/WinterSchool2018/Document-Image-Classification)
+
 
 Document-Image-Classification - прототип системы верификации документов.
 
